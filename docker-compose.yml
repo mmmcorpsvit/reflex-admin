@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  reflex-dev:
+    build:
+      context: .
+    ports:
+      - "8000:8000"  # Map the container's port to localhost
+      - "3000:3000"  # Map the container's port to localhost
+    volumes:
+      - .:/app  # Mount code for live updates
+    command: ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "app/main.py"]
+    environment:
+      PYTHONUNBUFFERED: 1
